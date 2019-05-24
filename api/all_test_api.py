@@ -1,13 +1,10 @@
 # coding:utf-8
-from my_dispatcher import api_add
-a = 0
+from my_dispatcher import api_add, api
 
 
 @api_add
-def my_method(*args, **kwargs):
-    global a
-    a += 1
-    print(a)
-    return a
+def hello(*args, **kwargs):
+
+    return {"hello": "hello"}
 
 

@@ -1,24 +1,20 @@
 import time
-
-import requests
 import json
+import requests
 
 
 class Hyf(object):
     def __init__(self):
         self.appid = "hyf_app"
-        # self.appid = "c66816dbb90591b1a1740ea0dc9b602e"
         self.headers = {
             "content-type": "application/json",
-            "Authorization": "poa test"
+            "Authorization": "flo test"
         }
         self.payload = {
             "jsonrpc": "2.0",
             "id": 1,
             "method": "",
             "params": {
-                "appid": self.appid,
-                "sign": "",
                 "data": {
                 
                 }
@@ -28,33 +24,69 @@ class Hyf(object):
     
     def send_request(self, url, method, data):
         self.payload["method"] = method
-        self.payload["params"]["sign"] = self.ec_cli.sign_str(data)
-        self.payload["params"]["data"] = self.ec_srv.encrypt_str(data)
-        
+        self.payload["params"]["data"] = data
+        print(url)
+        print(self.payload)
         response = requests.post(url=url, data=json.dumps(self.payload), headers=self.headers)
-        if isinstance(response, bytes):
-            response = response.decode()
-        else:
-            response = response.json()
-        print(response)
-        ddata = self.ec_cli.decrypt(response["result"]["data"])
-        print(ddata)
-        print(self.ec_srv.verify(ddata, response["result"]["sign"]))
+        print(response.json())
 
     def test_my_method(self):
         method = "my_method"
         data = {
             "time": time.time()
         }
-        self.send_request(url=self.url_neiwang, method=method, data=data)
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_difficulty(self):
+        method = "get_difficulty"
+        data = {
+
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_coin_supply(self):
+        method = "get_coin_supply"
+        data = {
+
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_distribution(self):
+        method = "get_distribution"
+        data = {
+
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_block_count(self):
+        method = "get_block_count"
+        data = {
+
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_network_hashps(self):
+        method = "get_network_hashps"
+        data = {
+
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_node_count(self):
+        method = "get_node_count"
+        data = {
+
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
 
 
 if __name__ == "__main__":
     hyf = Hyf()
-    # hyf.test_add_master_contract()
-    # hyf.test_deploy_contract()
-    # hyf.test_use_contract()
-    # hyf.test_create_account()
-    # hyf.test_get_balance()
-    hyf.test_send_transaction()
-    # hyf.test_add_master_contract()
+
+    # hyf.test_my_method()
+    # hyf.test_get_difficulty()
+    # hyf.test_get_coin_supply()
+    # hyf.test_get_distribution()
+    # hyf.test_get_block_count()
+    # hyf.test_get_network_hashps()
+    # hyf.test_get_node_count()

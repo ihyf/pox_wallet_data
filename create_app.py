@@ -3,7 +3,7 @@ from flask import Flask
 from flask_cors import CORS
 import config
 from my_dispatcher import api
-# from api import *
+from api import *
 
 
 def create_app():
