@@ -21,6 +21,7 @@ class Hyf(object):
             }
         }
         self.url_local = "http://localhost:9000/api"
+        self.url_wai = "http://149.28.56.184:9000/api"
     
     def send_request(self, url, method, data):
         self.payload["method"] = method
@@ -42,7 +43,7 @@ class Hyf(object):
         data = {
 
         }
-        self.send_request(url=self.url_local, method=method, data=data)
+        self.send_request(url=self.url_wai, method=method, data=data)
 
     def test_get_coin_supply(self):
         method = "get_coin_supply"
@@ -84,9 +85,9 @@ if __name__ == "__main__":
     hyf = Hyf()
 
     # hyf.test_my_method()
-    # hyf.test_get_difficulty()
-    # hyf.test_get_coin_supply()
-    # hyf.test_get_distribution()
-    # hyf.test_get_block_count()
-    # hyf.test_get_network_hashps()
-    # hyf.test_get_node_count()
+    hyf.test_get_difficulty()
+    hyf.test_get_coin_supply()
+    hyf.test_get_distribution()
+    hyf.test_get_block_count()
+    hyf.test_get_network_hashps()
+    hyf.test_get_node_count()
