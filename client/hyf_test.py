@@ -15,9 +15,7 @@ class Hyf(object):
             "id": 1,
             "method": "",
             "params": {
-                "data": {
-                
-                }
+
             }
         }
         self.url_local = "http://localhost:9000/api"
@@ -25,7 +23,7 @@ class Hyf(object):
     
     def send_request(self, url, method, data):
         self.payload["method"] = method
-        self.payload["params"]["data"] = data
+        self.payload["params"] = data
         print(url)
         print(self.payload)
         response = requests.post(url=url, data=json.dumps(self.payload), headers=self.headers)
@@ -80,14 +78,38 @@ class Hyf(object):
         }
         self.send_request(url=self.url_local, method=method, data=data)
 
+    def test_get_balance(self):
+        method = "get_balance"
+        data = {
+            "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_transaction(self):
+        method = "get_transaction"
+        data = {
+            "tx_id": "d701ebbbce03ba7491f920dd2130265bea166ef7d7a39d7a2689813b6c12cc68"
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
+    def test_get_transactions_by_address(self):
+        method = "get_transactions_by_address"
+        data = {
+            "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
+        }
+        self.send_request(url=self.url_local, method=method, data=data)
+
 
 if __name__ == "__main__":
     hyf = Hyf()
 
     # hyf.test_my_method()
-    hyf.test_get_difficulty()
-    hyf.test_get_coin_supply()
-    hyf.test_get_distribution()
-    hyf.test_get_block_count()
-    hyf.test_get_network_hashps()
-    hyf.test_get_node_count()
+    # hyf.test_get_difficulty()
+    # hyf.test_get_coin_supply()
+    # hyf.test_get_distribution()
+    # hyf.test_get_block_count()
+    # hyf.test_get_network_hashps()
+    # hyf.test_get_node_count()
+    # hyf.test_get_balance()
+    # hyf.test_get_transaction()
+    hyf.test_get_transactions_by_address()

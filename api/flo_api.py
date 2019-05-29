@@ -91,3 +91,53 @@ def get_node_count(*args, **kwargs):
     return {
         "node_count": node_count or ""
     }
+
+
+@api_add
+def get_transaction(*args, **kwargs):
+    """通过txid 获取交易详情"""
+    tx_id = kwargs.get("tx_id", "")
+    if tx_id == "":
+        return {"error": "tx_id is null"}
+    r = requests.get(f"http://network.flo.cash/api/getrawtransaction?txid={tx_id}&decrypt=1")
+    if r.status_code != 200:
+        return {"error": "get transaction fail"}
+
+    if r.json() != "":
+        transaction = r.json()
+
+    return {
+        "transaction": transaction or ""
+    }
+
+
+@api_add
+def get_balance(*args, **kwargs):
+    """获取余额"""
+    address = kwargs.get("address", "")
+    r = requests.get(f"http://network.flo.cash/ext/getbalance/{address}")
+    if r.status_code != 200:
+        return {"error": "get balance fail"}
+
+    if r.json() != "":
+        balance = str(r.json())
+
+    return {
+        "balance": balance or ""
+    }
+
+
+@api_add
+def get_transactions_by_address(*args, **kwargs):
+    """获取交易记录"""
+    address = kwargs.get("address", "")
+    r = requests.get(f"http://network.flo.cash/ext/getaddress/{address}")
+    if r.status_code != 200:
+        return {"error": "get_transactions_by_address fail"}
+
+    if r.json() != "":
+        info = r.json()
+
+    return {
+        "info": info or ""
+    }
