@@ -77,5 +77,8 @@ settxfee amount
 signmessage "florincoinaddress" "message"
 
 
+rpcuser=tuhKJgJJ0eEWF8v1jlGj6jU86LpbAh
+rpcpassword=lUwUMvnP48S3vpmdGJoo6aAVwqdsq9
+
 
 

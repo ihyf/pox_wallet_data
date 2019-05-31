@@ -1,7 +1,7 @@
 import time
 import json
 import requests
-
+import base64
 
 class Hyf(object):
     def __init__(self):
@@ -112,4 +112,8 @@ if __name__ == "__main__":
     # hyf.test_get_node_count()
     # hyf.test_get_balance()
     # hyf.test_get_transaction()
-    hyf.test_get_transactions_by_address()
+    # hyf.test_get_transactions_by_address()
+    v = base64.encode("1", "utf-8")
+    print(v)
+    b'\xa3\xd1\x85{\xe5\xb2;M;\x89\xb8\xc9o\x02\xf6\x03D \xb8\x16\xe6\x96VX\x17\xa5\xdaE\xac_\x98\xdb\xb6\x01\xab\xe9\x16\x81'
+

@@ -228,3 +228,55 @@ URL:http://149.28.56.184:9000/api
 	"jsonrpc": "2.0"
 }
 ```
+# flo-获取账户交易记录
+---
+URL:http://149.28.56.184:9000/api
+## 上行
+
+```json
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "get_transactions_by_address",
+	"params": {
+        "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
+	}
+}
+```
+
+## 下行
+```json
+{
+	"result": {
+		"info": {
+			"address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+			"sent": 122.099865,
+			"received": 151.799775,
+			"balance": "29.69991",
+			"last_txs": [{
+					"type": "vout",
+					"addresses": "d9ac50e3ed9ea3c4cf193c502920fb4e1c8a4e22de53994cc480b0f79661fb9b"
+				},
+				{
+					"addresses": "7f636844984f265c32e7182b0d3c41a33ae11e2fe9774dd138b2ed99cdadbe89",
+					"type": "vin"
+				},
+				{
+					"addresses": "8c8ef37dfed13d37810bb63ca8131e08e7f263f0df85eb5a72eea4f467656380",
+					"type": "vin"
+				},
+				{
+					"addresses": "d701ebbbce03ba7491f920dd2130265bea166ef7d7a39d7a2689813b6c12cc68",
+					"type": "vin"
+				},
+				{
+					"addresses": "f9c937f2a42d470a5b268e5a63db7561eccc140d14c10a1859dcf7629b5596dc",
+					"type": "vin"
+				}
+			]
+		}
+	},
+	"id": 1,
+	"jsonrpc": "2.0"
+}
+```
