@@ -1,5 +1,21 @@
+# coding:utf-8
 import requests
 from my_dispatcher import api_add, api
+import asyncio
+import aiohttp
+
+sema = asyncio.Semaphore(3)
+event_loop = asyncio.get_event_loop()
+
+
+async def get_data(url):
+    async with aiohttp.request('GET', url) as r:
+        if r.status == 200:
+            data = await r.json(content_type=None)
+            return data
+        else:
+            # todo log error
+            return [0, 0, 0, 0, 0]
 
 
 @api_add
@@ -64,18 +80,27 @@ def get_distribution(*args, **kwargs):
 
 
 @api_add
-def get_block_count(*args, **kwargs):
+def get_info(*args, **kwargs):
     """获取当前块数"""
-    r = requests.get("http://network.flo.cash/api/getblockcount")
-    if r.status_code != 200:
-        return {"error": "get block count fail"}
-
-    if r.json() != "":
-        block_count = str(r.json())
-
+    url = ["http://network.flo.cash/api/getdifficulty",
+           "http://network.flo.cash/ext/getmoneysupply",
+           "http://network.flo.cash/api/getblockcount",
+           "http://network.flo.cash/api/getnetworkhashps",
+           "http://network.flo.cash/api/getconnectioncount"]
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    tasks = [get_data(u) for u in url]
+    results = loop.run_until_complete(asyncio.gather(*tasks))
     return {
-        "block_count": block_count or ""
+        "difficulty": str(results[0]) or "",
+        "coin_supply": str(results[1]) or "",
+        "block_count": str(results[2]) or "",
+        "network_hashps": str(results[3]*pow(10, -9))[0:8] + " GH/s" or "",
+        "node_count": str(results[4]) or "",
+
     }
+
+
 
 
 @api_add
