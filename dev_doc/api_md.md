@@ -1,13 +1,13 @@
-# flo-获取难度值
+# flo-get_info
 ---
-URL:http://149.28.56.184:9000/api
+URL:http://45.77.220.158:9000/api
 ## 上行
 
 ```json
 {
 	"jsonrpc": "2.0",
 	"id": 1,
-	"method": "get_difficulty",
+	"method": "get_info",
 	"params": {
 
 	}
@@ -18,115 +18,11 @@ URL:http://149.28.56.184:9000/api
 ```json
 {
     "result": {
-        "difficulty": "2662.65787070532" //难度值
-    },
-    "id": 1,
-    "jsonrpc": "2.0"
-}
-```
-
-
-# flo-获取当前flo总量
----
-URL:http://149.28.56.184:9000/api
-## 上行
-
-```json
-{
-	"jsonrpc": "2.0",
-	"id": 1,
-	"method": "get_coin_supply",
-	"params": {
-
-	}
-}
-```
-
-## 下行
-```json
-{
-    "result": {
-        "coin_supply": "151073657.95824438"  //总量
-    },
-    "id": 1,
-    "jsonrpc": "2.0"
-}
-```
-
-# flo-获取当前区块高度
----
-URL:http://149.28.56.184:9000/api
-## 上行
-
-```json
-{
-	"jsonrpc": "2.0",
-	"id": 1,
-	"method": "get_block_count",
-	"params": {
-
-	}
-}
-```
-
-## 下行
-```json
-{
-    "result": {
-        "block_count": "3450820"
-    },
-    "id": 1,
-    "jsonrpc": "2.0"
-}
-```
-
-# flo-获取当前节点数量
----
-URL:http://149.28.56.184:9000/api
-## 上行
-
-```json
-{
-	"jsonrpc": "2.0",
-	"id": 1,
-	"method": "get_node_count",
-	"params": {
-
-	}
-}
-```
-
-## 下行
-```json
-{
-    "result": {
-        "node_count": "100"
-    },
-    "id": 1,
-    "jsonrpc": "2.0"
-}}
-```
-# flo-获取全网算力
----
-URL:http://149.28.56.184:9000/api
-## 上行
-
-```json
-{
-	"jsonrpc": "2.0",
-	"id": 1,
-	"method": "get_network_hashps",
-	"params": {
-
-	}
-}
-```
-
-## 下行
-```json
-{
-    "result": {
-        "network_hashps": "265.7371 GH/s"
+        "difficulty": "2437.731013642524",
+        "coin_supply": "151166710.48521888",
+        "block_count": "3465638",
+        "network_hashps": "280.2952 GH/s",
+        "node_count": "116"
     },
     "id": 1,
     "jsonrpc": "2.0"
@@ -135,7 +31,7 @@ URL:http://149.28.56.184:9000/api
 
 # flo-获取账户余额
 ---
-URL:http://149.28.56.184:9000/api
+URL:http://45.77.220.158:9000/api
 ## 上行
 
 ```json
@@ -161,7 +57,7 @@ URL:http://149.28.56.184:9000/api
 ```
 # flo-通过tx_id获取交易详情
 ---
-URL:http://149.28.56.184:9000/api
+URL:http://45.77.220.158:9000/api
 ## 上行
 
 ```json
@@ -230,7 +126,7 @@ URL:http://149.28.56.184:9000/api
 ```
 # flo-获取账户交易记录
 ---
-URL:http://149.28.56.184:9000/api
+URL:http://45.77.220.158:9000/api
 ## 上行
 
 ```json
@@ -278,5 +174,131 @@ URL:http://149.28.56.184:9000/api
 	},
 	"id": 1,
 	"jsonrpc": "2.0"
+}
+```
+# flo-获取账户交易记录
+---
+URL:http://45.77.220.158:9000/api
+## 上行
+
+```json
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "get_transactions_by_address",
+	"params": {
+        "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
+	}
+}
+```
+
+## 下行
+```json
+{
+	"result": {
+		"info": {
+			"address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+			"sent": 122.099865,
+			"received": 151.799775,
+			"balance": "29.69991",
+			"last_txs": [{
+					"type": "vout",
+					"addresses": "d9ac50e3ed9ea3c4cf193c502920fb4e1c8a4e22de53994cc480b0f79661fb9b"
+				},
+				{
+					"addresses": "7f636844984f265c32e7182b0d3c41a33ae11e2fe9774dd138b2ed99cdadbe89",
+					"type": "vin"
+				},
+				{
+					"addresses": "8c8ef37dfed13d37810bb63ca8131e08e7f263f0df85eb5a72eea4f467656380",
+					"type": "vin"
+				},
+				{
+					"addresses": "d701ebbbce03ba7491f920dd2130265bea166ef7d7a39d7a2689813b6c12cc68",
+					"type": "vin"
+				},
+				{
+					"addresses": "f9c937f2a42d470a5b268e5a63db7561eccc140d14c10a1859dcf7629b5596dc",
+					"type": "vin"
+				}
+			]
+		}
+	},
+	"id": 1,
+	"jsonrpc": "2.0"
+}
+```
+# flo-获取交易费
+---
+URL:http://45.77.220.158:8889/jsonrpc
+## 上行
+
+```json
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "get_transaction_fee",
+	"params": {
+		"wif":"xxx",
+		"address":"FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+		"value": 0.1
+	}
+}
+```
+
+## 下行
+```json
+{
+    "result": {
+        "inputs": [
+            {
+                "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "txId": "29c987fd0bdb9e648b0e19d57211d7466a81174ce4a407668480bc0fa4fe2c39",
+                "vout": 0,
+                "scriptPubKey": "76a91440b1a4a6fc7c8b88ef2a1beac1fe3de118e8d08888ac",
+                "value": 2839925750,
+                "confirmations": 0
+            }
+        ],
+        "outputs": [
+            {
+                "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "value": 10000000
+            },
+            {
+                "value": 2829923500
+            }
+        ],
+        "fee": 2250
+    },
+    "id": 1,
+    "jsonrpc": "2.0"
+}
+```
+
+# flo-转账
+---
+URL:http://45.77.220.158:8889/jsonrpc
+## 上行
+
+```json
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "set_transaction",
+	"params": {
+		"wif":"xx",
+		"address":"FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+		"value": 0.09
+	}
+}
+```
+
+## 下行
+```json
+{
+    "result": "49b61ccc6b2d49961e50c6635869eb5001e208d71a9a75d0fbe75fc04fcc8acd",
+    "id": 1,
+    "jsonrpc": "2.0"
 }
 ```

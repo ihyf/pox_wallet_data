@@ -105,6 +105,13 @@ class Hyf(object):
         }
         self.send_request(url=self.url_local, method=method, data=data)
 
+    def test_lllll(self):
+        method = "lllll"
+        data = {
+            "ihyf": 123
+        }
+        self.send_request(url="http://127.0.0.1:8889/jsonrpc", method=method, data=data)
+
 
 if __name__ == "__main__":
     hyf = Hyf()
@@ -113,13 +120,14 @@ if __name__ == "__main__":
     # hyf.test_get_difficulty()
     # hyf.test_get_coin_supply()
     # hyf.test_get_distribution()
-    hyf.test_get_info()
+    # hyf.test_get_info()
     # hyf.test_get_network_hashps()
     # hyf.test_get_node_count()
     # hyf.test_get_balance()
     # hyf.test_get_transaction()
     # hyf.test_get_transactions_by_address()
     # v = base64.encode("1", "utf-8")
+    hyf.test_lllll()
     # print(v)
     # b'\xa3\xd1\x85{\xe5\xb2;M;\x89\xb8\xc9o\x02\xf6\x03D \xb8\x16\xe6\x96VX\x17\xa5\xdaE\xac_\x98\xdb\xb6\x01\xab\xe9\x16\x81'
 
