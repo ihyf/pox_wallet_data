@@ -124,7 +124,35 @@ URL:http://45.77.220.158:9000/api
 	"jsonrpc": "2.0"
 }
 ```
-# flo-获取账户交易记录
+# flo-获取flo当前价格
+---
+URL:http://45.77.220.158:9000/api
+## 上行
+
+```json
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "get_flo_price",
+	"params": {
+
+	}
+}
+```
+
+## 下行
+```json
+{
+    "result": {
+        "flo_rmb": "0.5427",
+        "flo_usd": "0.077910",
+        "flo_btc": "0.00000980"
+    },
+    "id": 1,
+    "jsonrpc": "2.0"
+}
+```
+# flo-获取账户交易记录-暂时废弃
 ---
 URL:http://45.77.220.158:9000/api
 ## 上行
@@ -178,16 +206,16 @@ URL:http://45.77.220.158:9000/api
 ```
 # flo-获取账户交易记录
 ---
-URL:http://45.77.220.158:9000/api
+URL:http://45.77.220.158:8889/jsonrpc
 ## 上行
 
 ```json
 {
 	"jsonrpc": "2.0",
 	"id": 1,
-	"method": "get_transactions_by_address",
+	"method": "get_transactions",
 	"params": {
-        "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
+		"address":"FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
 	}
 }
 ```
@@ -195,37 +223,152 @@ URL:http://45.77.220.158:9000/api
 ## 下行
 ```json
 {
-	"result": {
-		"info": {
-			"address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
-			"sent": 122.099865,
-			"received": 151.799775,
-			"balance": "29.69991",
-			"last_txs": [{
-					"type": "vout",
-					"addresses": "d9ac50e3ed9ea3c4cf193c502920fb4e1c8a4e22de53994cc480b0f79661fb9b"
-				},
-				{
-					"addresses": "7f636844984f265c32e7182b0d3c41a33ae11e2fe9774dd138b2ed99cdadbe89",
-					"type": "vin"
-				},
-				{
-					"addresses": "8c8ef37dfed13d37810bb63ca8131e08e7f263f0df85eb5a72eea4f467656380",
-					"type": "vin"
-				},
-				{
-					"addresses": "d701ebbbce03ba7491f920dd2130265bea166ef7d7a39d7a2689813b6c12cc68",
-					"type": "vin"
-				},
-				{
-					"addresses": "f9c937f2a42d470a5b268e5a63db7561eccc140d14c10a1859dcf7629b5596dc",
-					"type": "vin"
-				}
-			]
-		}
-	},
-	"id": 1,
-	"jsonrpc": "2.0"
+    "result": {
+        "txs": [
+            {
+                "txid": "c783ce7fb882282b08dbf43f7f24e440ade4fa7d6f1c6914683c2dc41d38bce8",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.1890775,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FTZ98LxWP6ksWvrEv9R5R4AAvek8sedwV3",
+                "value": "0.10000000",
+                "blockheight": 3471997,
+                "time": 1559660436,
+                "blocktime": 1559660436,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "b0ca07011de617256facb45be08204574032ebe47390729acb58471f879a3731",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.2891,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FTZ98LxWP6ksWvrEv9R5R4AAvek8sedwV3",
+                "value": "0.10000000",
+                "blockheight": 3471989,
+                "time": 1559660023,
+                "blocktime": 1559660023,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "8532fe2abb6b4cbc20ccfe1725522ced895ef1b1030b183ed51a25d058476876",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.3891225,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "F85yR5SHbTg2So4DcVtskaNXw2e5A6dnLN",
+                "value": "0.10000000",
+                "blockheight": 3471980,
+                "time": 1559659686,
+                "blocktime": 1559659686,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "b057138d130946bfc152e03c6f82b90021b2844c60e0a325c7f9f5bea6bd2413",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.399145,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FKXpmwKdTnMrQQBVhBRLpMbQy7PqiicYgV",
+                "value": "0.01000000",
+                "blockheight": 3471938,
+                "time": 1559657768,
+                "blocktime": 1559657768,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "d82a372008cd462fdda5744694778efddc9138ba692ab66ae1905eed5fbb60ac",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.3991675,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "value": "28.39916750",
+                "blockheight": 3470067,
+                "time": 1559579239,
+                "blocktime": 1559579239,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "027168f3055036336eacd65e1016f1989e3704cfeb9c0dad31dd96880eb2b06b",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.399235,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "value": "28.39923500",
+                "blockheight": 3470060,
+                "time": 1559578497,
+                "blocktime": 1559578497,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "29c987fd0bdb9e648b0e19d57211d7466a81174ce4a407668480bc0fa4fe2c39",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.3992575,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "value": "28.39925750",
+                "blockheight": 3470060,
+                "time": 1559578497,
+                "blocktime": 1559578497,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "49b61ccc6b2d49961e50c6635869eb5001e208d71a9a75d0fbe75fc04fcc8acd",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.39919,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "value": "28.39919000",
+                "blockheight": 3470060,
+                "time": 1559578497,
+                "blocktime": 1559578497,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "54b814fc3f136faa36df309117f36374156a318cdd6d2842d80c79f0ef2fa026",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.399325,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "value": "28.39932500",
+                "blockheight": 3470060,
+                "time": 1559578497,
+                "blocktime": 1559578497,
+                "status": 1,
+                "in_or_out": "out"
+            },
+            {
+                "txid": "9237b7d62446f6f0ec70aa80bdb910f6fea101fe4807f7046e30bcce9906d4c1",
+                "floData": "",
+                "fees": 0.0000225,
+                "balance": 28.3993475,
+                "fromAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "toAddress": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
+                "value": "28.39934750",
+                "blockheight": 3470060,
+                "time": 1559578497,
+                "blocktime": 1559578497,
+                "status": 1,
+                "in_or_out": "out"
+            }
+        ]
+    },
+    "id": 1,
+    "jsonrpc": "2.0"
 }
 ```
 # flo-获取交易费

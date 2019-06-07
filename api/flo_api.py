@@ -3,6 +3,7 @@ import requests
 from my_dispatcher import api_add, api
 import asyncio
 import aiohttp
+from lxml import etree
 
 sema = asyncio.Semaphore(3)
 event_loop = asyncio.get_event_loop()
@@ -165,4 +166,20 @@ def get_transactions_by_address(*args, **kwargs):
 
     return {
         "info": info or ""
+    }
+
+
+@api_add
+def get_flo_price(*args, **kwargs):
+    """获取flo价格"""
+    r = requests.get("https://www.feixiaohao.com/currencies/florincoin/")
+    selector = etree.HTML(r.text)
+    flo_rmb = selector.xpath("//span[@class='convert']")[1].text
+    flo_usd = selector.xpath("//span[@class='convert']")[2].text
+    flo_btc = selector.xpath("//span[@class='convert']")[3].text
+
+    return {
+        "flo_rmb": flo_rmb,
+        "flo_usd": flo_usd,
+        "flo_btc": flo_btc
     }
