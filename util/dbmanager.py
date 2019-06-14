@@ -57,10 +57,10 @@ class DBManager(object):
         except IndexError:
             raise IndexError('cannot get names from DB_SETTINGS')
 
-    def get_engine_master(self, dbalias):
+    def get_engine_master(self, dbalias="default"):
         return random.choice(self.engine_map[dbalias]['master'])
 
-    def get_autobase_obj(self, dbalias):
+    def get_autobase_obj(self, dbalias="default"):
         return self._ab_master(dbalias)
 
     def master(self, dbalias="default"):

@@ -5,7 +5,7 @@ DEBUG = True
 SQLALCHEMY_DATABASE_URI_SETTINGS = {
     "default": {
         'master': [
-            'mysql+pymysql://root:123456@127.0.0.1/pox_wallet?charset=utf8',
+            'mysql+pymysql://root:123456@127.0.0.1/server_db?charset=utf8',
         ],
     },
 
@@ -33,6 +33,8 @@ SQLALCHEMY_DATABASE_URI_SETTINGS_bak = {
 
 REDIS_URL_bak = "redis://:@47.244.167.66:6379/0?charset=utf8&decode_responses=true"
 
+
+API_TRUST_DOMAIN = ""
 
 
 
