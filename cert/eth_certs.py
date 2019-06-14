@@ -307,7 +307,7 @@ class EthCert(object):
 
 
 if __name__ == "__main__":
-    ec = EthCert("text")
+    ec = EthCert("text11")
     # 生成私钥与公钥, 长度默认为2048
     ec.generate(4096)
     print(ec.get_publickey())
