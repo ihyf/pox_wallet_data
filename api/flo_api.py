@@ -174,9 +174,9 @@ def get_flo_price(*args, **kwargs):
     """获取flo价格"""
     r = requests.get("https://www.feixiaohao.com/currencies/florincoin/")
     selector = etree.HTML(r.text)
-    flo_rmb = selector.xpath("//span[@class='convert']")[1].text
-    flo_usd = selector.xpath("//span[@class='convert']")[2].text
-    flo_btc = selector.xpath("//span[@class='convert']")[3].text
+    flo_rmb = selector.xpath("//span[@class='convert']")[0].text
+    flo_usd = selector.xpath("//span[@class='convert']")[1].text
+    flo_btc = selector.xpath("//span[@class='convert']")[2].text
 
     return {
         "flo_rmb": flo_rmb,
