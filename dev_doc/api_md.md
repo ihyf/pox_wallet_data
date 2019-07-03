@@ -384,7 +384,8 @@ URL:http://45.77.220.158:8889/jsonrpc
 	"params": {
 		"wif":"xxx",
 		"address":"FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
-		"value": 0.1
+		"value": 0.1,
+		"flodata": "mc 真有钱"
 	}
 }
 ```
@@ -432,7 +433,8 @@ URL:http://45.77.220.158:8889/jsonrpc
 	"params": {
 		"wif":"xx",
 		"address":"FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK",
-		"value": 0.09
+		"value": 0.09,
+		"flodata": "mc 真有钱"
 	}
 }
 ```
