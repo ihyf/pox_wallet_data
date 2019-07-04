@@ -86,7 +86,7 @@ class Hyf(object):
         data = {
             "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
         }
-        self.send_request(url=self.url_local_node, method=method, data=data)
+        self.send_request(url=self.url_wai_node, method=method, data=data)
 
     def test_get_transaction(self):
         method = "get_transaction"
@@ -100,7 +100,7 @@ class Hyf(object):
         data = {
             "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
         }
-        self.send_request(url=self.url_wai, method=method, data=data)
+        self.send_request(url=self.url_wai_flask, method=method, data=data)
 
     def test_get_info(self):
         method = "get_info"
@@ -108,12 +108,12 @@ class Hyf(object):
         }
         self.send_request(url=self.url_wai, method=method, data=data)
 
-    def test_lllll(self):
-        method = "lllll"
+    def test_get_address_utxo(self):
+        method = "get_address_utxo"
         data = {
-            "ihyf": 123
+            "address": "FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK"
         }
-        self.send_request(url="http://127.0.0.1:8889/jsonrpc", method=method, data=data)
+        self.send_request(url=self.url_wai_node, method=method, data=data)
 
 
 if __name__ == "__main__":
@@ -126,8 +126,9 @@ if __name__ == "__main__":
     # hyf.test_get_info()
     # hyf.test_get_network_hashps()
     # hyf.test_get_node_count()
-    for i in range(100):
-        hyf.test_get_balance()
+    for i in range(1):
+        hyf.test_get_address_utxo()
+    hyf.test_get_balance()
     # hyf.test_get_transaction()
     # hyf.test_get_transactions_by_address()
 

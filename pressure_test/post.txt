@@ -1,0 +1,1 @@
+{'jsonrpc': '2.0', 'id': 1, 'method': 'get_balance', 'params': {'address': 'FBjBWwd4Bm8MAYdJqqLB2pvDXzP1AomBXK'}}

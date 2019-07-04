@@ -1,0 +1,1 @@
+ab -n 10000 -c 100  -p "post.txt" -T "application/json" -H "Content-Type: application/json" "http://39.100.40.109:8889/jsonrpc"
