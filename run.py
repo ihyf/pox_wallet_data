@@ -1,11 +1,11 @@
 # coding: utf-8
 from create_app import app
+from flask import render_template
 
 
-@app.template_filter('md')
-def markdown_to_html(txt):
-    from markdown import markdown
-    return markdown(txt)
+@app.route('/privacy_agreement')
+def privacy_agreement():
+    return render_template("index.html")
 
 
 @app.route('/')
