@@ -32,7 +32,7 @@ class Hyf(object):
         return res
 
     def new_order_msg(self, order_type, side, symbol, price, quantity):
-        """"""
+        """下订单"""
         new_order_msg = NewOrderMsg(
             wallet=self.wallet,
             symbol=symbol,
@@ -51,7 +51,19 @@ class Hyf(object):
             symbol=self.symbol,
         )
         res = self.broadcast_transaction(cancel_order_msg, sync=True)
+        print(res)
+        return res
 
+    def cancel_all_orders(self):
+        """取消所有挂单"""
+        open_order = self.get_order_open(address)
+        self.get_order_close(address)
+        for o in open_order["order"]:
+            order_id = o.get("orderId", None)
+            if not order_id:
+                print("order is none")
+                break
+            self.cancel_order(order_id)
 
     def limit_order_msg_buy(self, symbol, price, quantity):
         """Limit Order Buy"""
@@ -119,9 +131,10 @@ class Hyf(object):
 
     def start_order(self, total_quantity, quantity):
         """开始刷单"""
-
+        real_total = 0
         for i in range(0, int(total_quantity/quantity)):
             try:
+                start = time.time()
                 buy_one, sell_one = self.get_buy_sell_one(self.symbol)
                 avg = Decimal((buy_one+sell_one)/2).quantize(Decimal('0.000'))
                 print(avg)
@@ -129,16 +142,20 @@ class Hyf(object):
                                                    price=avg, quantity=quantity)
                 sell_order_msg = self.new_order_msg(order_type=OrderType.LIMIT, side=OrderSide.SELL, symbol=self.symbol,
                                                     price=avg, quantity=quantity)
-
-                buy_order_order = self.broadcast_transaction(order_msg=buy_order_msg)
-                print(buy_order_order)
                 sell_order_order = self.broadcast_transaction(order_msg=sell_order_msg)
                 print(sell_order_order)
+                buy_order_order = self.broadcast_transaction(order_msg=buy_order_msg)
+                print(buy_order_order)
+                end = time.time()
+                print("time :" + str(end-start))
+                real_total += quantity
 
             except Exception as e:
                 print("start_order error:")
                 print(e)
                 break
+        print(real_total)
+
         return True
 
 
@@ -158,10 +175,16 @@ if __name__ == "__main__":
     symbol2 = "ANN-457_BNB"
 
     hyf = Hyf(env=testnet_env, private_key_string=private_key_str, symbol=symbol2)
-    # hyf.start_order(total_quantity=1, quantity=1)
-    # # hyf.get_order_book()
+    # hyf.start_order(total_quantity=100, quantity=1)
+    # # # hyf.get_order_book()
     hyf.get_banlance(address)
-    # hyf.get_order_open(address)
-    # hyf.get_order_close(address)
+    # # hyf.cancel_all_orders()
+    # # hyf.get_order_close(address)
+    print(len(hyf.get_order_open(address)["order"]))
+    print(len(hyf.get_order_close(address)["order"]))
+    # hyf.get_banlance(address)
+    # buy_msg = hyf.new_order_msg(order_type=OrderType.LIMIT, side=OrderSide.BUY, symbol=hyf.symbol,
+    #                                                price=1, quantity=50)
+    # sell_order_order = hyf.broadcast_transaction(order_msg=buy_msg)
 
 
