@@ -8,6 +8,11 @@ def privacy_agreement():
     return render_template("index.html")
 
 
+@app.route('/send_tera')
+def send_tera():
+    return render_template("send_tera.html")
+
+
 @app.route('/')
 def hello():
     return "hello"

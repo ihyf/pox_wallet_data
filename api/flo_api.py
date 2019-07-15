@@ -102,8 +102,6 @@ def get_info(*args, **kwargs):
     }
 
 
-
-
 @api_add
 def get_node_count(*args, **kwargs):
     """获取节点数"""
