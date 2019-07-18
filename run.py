@@ -1,6 +1,8 @@
 # coding: utf-8
+import os
 from create_app import app
 from flask import render_template
+from flask import request, jsonify, send_from_directory, abort
 
 
 @app.route('/privacy_agreement')
@@ -16,6 +18,14 @@ def send_tera():
 @app.route('/')
 def hello():
     return "hello"
+
+
+@app.route('/download_file/<filename>')
+def download(filename):
+    if request.method == "GET":
+        if os.path.isfile(os.path.join('static/files', filename)):
+            return send_from_directory('static/files', filename, as_attachment=True)
+        abort(404)
 
 
 if __name__ == '__main__':
