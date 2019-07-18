@@ -15,16 +15,18 @@ class Hyf(object):
         self.symbol = symbol
         self.env = env
         self.private_key_string = private_key_string
-        self.wallet = self._create_wallet_by_private_key()
-        self.cli = HttpApiClient(env=testnet_env, api_url=self.test_net_url)
+        self.wallet = Wallet(private_key=private_key_string, env=self.env)
+        self.cli = HttpApiClient(env=self.env, api_url=self.main_net_url)
 
     def create_bnb_wallet(self) -> Wallet:
         """generate Mnemonic --> wallet"""
         w = Wallet.create_random_wallet(env=self.env)
+        print(w.address)
+        print(w.private_key)
         return w
 
     def _create_wallet_by_private_key(self) -> Wallet:
-        w = Wallet(self.private_key_string, env=self.env)
+        w = Wallet(private_key=self.private_key_string, env=self.env)
         return w
 
     def broadcast_transaction(self, order_msg, sync=True):
@@ -54,7 +56,7 @@ class Hyf(object):
         print(res)
         return res
 
-    def cancel_all_orders(self):
+    def cancel_all_orders(self, address):
         """取消所有挂单"""
         open_order = self.get_order_open(address)
         self.get_order_close(address)
@@ -163,28 +165,36 @@ if __name__ == "__main__":
     testnet_env = BinanceEnvironment.get_testnet_env()
     master_env = BinanceEnvironment.get_production_env()
 
-    address = "tbnb1cz5ukltlqnrh7t8sy47qkcmxdu5ks0nq5nflmm"
+    test_net_address = "tbnb1cz5ukltlqnrh7t8sy47qkcmxdu5ks0nq5nflmm"
 
-    private_key_str = "c5b07f6a2f2794521a954e519093e98d768f24ca80675d192ff1d90e6fc055c3"
+    test_net_private_key_str = "c5b07f6a2f2794521a954e519093e98d768f24ca80675d192ff1d90e6fc055c3"
+
+    main_net_address = "bnb1ewt0w4z4zfnjvmvnqg5fvl35lvp364yk7rhs8l"
+    main_net_private_key_str = "a2ef355c3d1c58851f84ef7476239db8939434b6c89ad946a94ebdf438037c68"
+
 
     # 获取token列表
+    # client = HttpApiClient(env=master_env, api_url="https://dex.binance.org/")
     # token_list = client.get_tokens()
     # print(token_list)
 
-    symbol1 = "BZNT-464_BNB"
+    # print(token_list)
+
+    symbol1 = "COS-2E4_BNB"
     symbol2 = "ANN-457_BNB"
 
-    hyf = Hyf(env=testnet_env, private_key_string=private_key_str, symbol=symbol2)
+    hyf = Hyf(env=master_env, private_key_string=main_net_private_key_str, symbol=symbol1)
     # hyf.start_order(total_quantity=100, quantity=1)
-    # # # hyf.get_order_book()
-    hyf.get_banlance(address)
-    # # hyf.cancel_all_orders()
-    # # hyf.get_order_close(address)
-    print(len(hyf.get_order_open(address)["order"]))
-    print(len(hyf.get_order_close(address)["order"]))
-    # hyf.get_banlance(address)
+    hyf.get_order_book()
+    # hyf.create_bnb_wallet()
+    hyf.get_banlance(main_net_address)
+    hyf.cancel_all_orders(main_net_address)
+    # hyf.get_order_close(main_net_address)
+    # hyf.get_order_open(main_net_address)
     # buy_msg = hyf.new_order_msg(order_type=OrderType.LIMIT, side=OrderSide.BUY, symbol=hyf.symbol,
     #                                                price=1, quantity=50)
     # sell_order_order = hyf.broadcast_transaction(order_msg=buy_msg)
+    hyf.get_banlance(main_net_address)
+
 
 

@@ -62,7 +62,7 @@ class Hyf(object):
             try:
                 start = time.time()
                 buy_one, sell_one = await self.get_buy_sell_one(cli=cli, symbol=self.symbol)
-                avg = Decimal((buy_one+sell_one)/2).quantize(Decimal('0.000'))
+                avg = Decimal((buy_one+sell_one)/2).quantize(Decimal('0.000000'))
                 print(avg)
                 buy_order_msg = await self.new_order_msg(order_type=OrderType.LIMIT, side=OrderSide.BUY, symbol=self.symbol,
                                                    price=avg, quantity=quantity)
@@ -75,7 +75,7 @@ class Hyf(object):
                 end = time.time()
                 print("time :" + str(end-start))
                 real_total += quantity
-                # asyncio.sleep(1)
+                asyncio.sleep(1)
 
             except Exception as e:
                 print("start_order error:")
@@ -88,9 +88,14 @@ class Hyf(object):
 
 if __name__ == "__main__":
     test_env = BinanceEnvironment.get_testnet_env()
+    master_env = BinanceEnvironment.get_production_env()
     private_key_str = "c5b07f6a2f2794521a954e519093e98d768f24ca80675d192ff1d90e6fc055c3"
     symbol2 = "ANN-457_BNB"
+
+    main_net_address = "bnb1ewt0w4z4zfnjvmvnqg5fvl35lvp364yk7rhs8l"
+    main_net_private_key_str = "a2ef355c3d1c58851f84ef7476239db8939434b6c89ad946a94ebdf438037c68"
+    symbol1 = "COS-2E4_BNB"
     loop = asyncio.get_event_loop()
-    hyf = Hyf(loop=loop, env=test_env, private_key_string=private_key_str, symbol=symbol2)
-    loop.run_until_complete(hyf.start_order(10, 1))
+    hyf = Hyf(loop=loop, env=master_env, private_key_string=main_net_private_key_str, symbol=symbol1)
+    loop.run_until_complete(hyf.start_order(200, 10))
     loop.close()
