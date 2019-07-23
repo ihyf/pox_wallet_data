@@ -224,6 +224,10 @@ def get_tr_create_time(**kwargs):
         }
     address = kwargs.get("address")
     tr = get_transaction_db(address)
+    if not tr:
+        return {
+            "tr_create_time": 0
+        }
     return {
         "tr_create_time": tr.time_stamp
     }

@@ -17,4 +17,6 @@ def get_transaction_db(address):
     tr = session.query(Transactions).filter(Transactions.in_or_out == "out"
                                             and Transactions.from_address == address).order_by(-Transactions.id).first()
     session.close()
+    if not tr:
+        return False
     return tr
