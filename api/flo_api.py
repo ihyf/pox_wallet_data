@@ -1,9 +1,14 @@
 # coding:utf-8
+import time
+
 import requests
 from my_dispatcher import api_add, api
 import asyncio
 import aiohttp
 from lxml import etree
+
+from util.check_fuc import check_kv
+from util.db_tools_func import add_transaction_db, get_transaction_db
 
 sema = asyncio.Semaphore(3)
 event_loop = asyncio.get_event_loop()
@@ -180,4 +185,45 @@ def get_flo_price(*args, **kwargs):
         "flo_rmb": flo_rmb,
         "flo_usd": flo_usd,
         "flo_btc": flo_btc
+    }
+
+
+@api_add
+def add_transaction(**kwargs):
+    necessary_keys = ["from_address", "to_address", "tx_id", "in_or_out"]
+    check = check_kv(kwargs, necessary_keys)
+    if check != "success":
+        return {
+            "error": check
+        }
+
+    from_address = kwargs.get("from_address")
+    to_address = kwargs.get("to_address")
+    tx_id = kwargs.get("tx_id")
+    in_or_out = kwargs.get("in_or_out")
+    time_stamp =time.time()
+    tr = add_transaction_db(from_address, to_address, tx_id, in_or_out, time_stamp)
+    if not tr:
+        return {
+            "error": "add transaction fail",
+            "code": -40000
+        }
+    return {
+        "msg": "add transaction success",
+        "code": 200
+    }
+
+
+@api_add
+def get_tr_create_time(**kwargs):
+    necessary_keys = ["address"]
+    check = check_kv(kwargs, necessary_keys)
+    if check != "success":
+        return {
+            "error": check
+        }
+    address = kwargs.get("address")
+    tr = get_transaction_db(address)
+    return {
+        "tr_create_time": tr.time_stamp
     }

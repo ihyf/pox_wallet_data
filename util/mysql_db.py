@@ -12,10 +12,19 @@ Base = declarative_base()
 class Account(Base):
     __tablename__ = 'account'
     id = Column(Integer, primary_key=True)
-    address = Column(String(80), unique=True)
+    address = Column(String(200), unique=True)
+    create_time = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
-    def __repr__(self):
-        return '<Account %r>' % self.address
+
+class Transactions(Base):
+    __tablename__ = "transactions"
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    from_address = Column(String(200))
+    to_address = Column(String(200))
+    tx_id = Column(String(400))
+    in_or_out = Column(String(5))
+    time_stamp = Column(String(20))
+    create_time = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
 
 class RecodeLogs(Base):

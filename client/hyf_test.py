@@ -122,6 +122,23 @@ class Hyf(object):
         }
         self.send_request(url=self.url_wai_node, method=method, data=data)
 
+    def test_add_transaction(self):
+        method = "add_transaction"
+        data = {
+            "from_address": "F7WTiJVJNREE14MSVzgjiqFYUNTom7WmVG",
+            "to_address": "123456789",
+            "tx_id": "tx_id",
+            "in_or_out": "out"
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
+    def test_get_tr_create_time(self):
+        method = "get_tr_create_time"
+        data = {
+            "address": "F7WTiJVJNREE14MSVzgjiqFYUNTom7WmVG"
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
 
 if __name__ == "__main__":
     hyf = Hyf()
@@ -135,9 +152,11 @@ if __name__ == "__main__":
     # hyf.test_get_node_count()
     # for i in range(1):
     #     hyf.test_get_address_utxo()
-    hyf.test_get_balance()
+    # hyf.test_get_balance()
     # hyf.test_get_transaction()
     # hyf.test_get_transactions_by_address()
     # hyf.test_get_transactions()
+    hyf.test_add_transaction()
+    hyf.test_get_tr_create_time()
 
 

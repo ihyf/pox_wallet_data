@@ -1,6 +1,6 @@
 # flo-get_info
 ---
-URL:http://45.77.220.158:9000/api
+URL:http://39.100.40.109:9000/api
 ## 上行
 
 ```json
@@ -31,7 +31,7 @@ URL:http://45.77.220.158:9000/api
 
 # flo-获取账户余额
 ---
-URL:http://45.77.220.158:9000/api
+URL:http://39.100.40.109:9000/api
 ## 上行
 
 ```json
@@ -57,7 +57,7 @@ URL:http://45.77.220.158:9000/api
 ```
 # flo-通过tx_id获取交易详情
 ---
-URL:http://45.77.220.158:9000/api
+URL:http://39.100.40.109:9000/api
 ## 上行
 
 ```json
@@ -126,7 +126,7 @@ URL:http://45.77.220.158:9000/api
 ```
 # flo-获取flo当前价格
 ---
-URL:http://45.77.220.158:9000/api
+URL:http://39.100.40.109:9000/api
 ## 上行
 
 ```json
@@ -154,7 +154,7 @@ URL:http://45.77.220.158:9000/api
 ```
 # flo-获取账户交易记录-暂时废弃
 ---
-URL:http://45.77.220.158:9000/api
+URL:http://39.100.40.109:9000/api
 ## 上行
 
 ```json
@@ -206,7 +206,7 @@ URL:http://45.77.220.158:9000/api
 ```
 # flo-获取账户交易记录
 ---
-URL:http://45.77.220.158:8889/jsonrpc
+URL:http://39.100.40.109:8889/jsonrpc
 ## 上行
 
 ```json
@@ -373,7 +373,7 @@ URL:http://45.77.220.158:8889/jsonrpc
 ```
 # flo-获取交易费
 ---
-URL:http://45.77.220.158:8889/jsonrpc
+URL:http://39.100.40.109:8889/jsonrpc
 ## 上行
 
 ```json
@@ -422,7 +422,7 @@ URL:http://45.77.220.158:8889/jsonrpc
 
 # flo-转账
 ---
-URL:http://45.77.220.158:8889/jsonrpc
+URL:http://39.100.40.109:8889/jsonrpc
 ## 上行
 
 ```json
@@ -445,5 +445,63 @@ URL:http://45.77.220.158:8889/jsonrpc
     "result": "49b61ccc6b2d49961e50c6635869eb5001e208d71a9a75d0fbe75fc04fcc8acd",
     "id": 1,
     "jsonrpc": "2.0"
+}
+```
+
+# 新增一条交易记录
+---
+URL:http://39.100.40.109:9000/api
+## 上行
+
+```json
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "add_transaction",
+	"params": {
+		"from_address": "F7WTiJVJNREE14MSVzgjiqFYUNTom7WmVG",
+		"to_address": "xxWxiJVJNREE14MSVzgjiqFYUNTom7WmVG",
+		"tx_id": "tx_id",
+		"in_or_out": "out"
+	}
+}
+```
+
+## 下行
+```json
+{
+	"result": {
+		"msg": "add transaction success",
+		"code": 200
+	},
+	"id": 1,
+	"jsonrpc": "2.0"
+}
+```
+
+# 获取最新转出交易的时间戳
+---
+URL:http://39.100.40.109:9000/api
+## 上行
+
+```json
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "get_tr_create_time",
+	"params": {
+		"address": "F7WTiJVJNREE14MSVzgjiqFYUNTom7WmVG"
+	}
+}
+```
+
+## 下行
+```json
+{
+	"result": {
+		"tr_create_time": "1563854229.29188"
+	},
+	"id": 1,
+	"jsonrpc": "2.0"
 }
 ```

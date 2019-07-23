@@ -14,7 +14,7 @@ def check_kv(d1, necessary_keys):
     if error:
         return error
     else:
-        return "Success"
+        return "success"
 
 
 def bytes_str_to_dict(b):

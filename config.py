@@ -36,5 +36,8 @@ REDIS_URL_bak = "redis://:@47.244.167.66:6379/0?charset=utf8&decode_responses=tr
 
 API_TRUST_DOMAIN = ""
 
+# 创建server_db
+"create database pox_wallet default character set utf8mb4;"
+
 
 
