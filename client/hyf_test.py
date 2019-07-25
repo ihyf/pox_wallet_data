@@ -137,7 +137,7 @@ class Hyf(object):
         data = {
             "address": "F7WTiJVJNREE14MSVzgjiqFYUNTom7WmVG"
         }
-        self.send_request(url=self.url_wai_flask, method=method, data=data)
+        self.send_request(url=self.url_local_flask, method=method, data=data)
 
 
 if __name__ == "__main__":

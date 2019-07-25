@@ -226,8 +226,14 @@ def get_tr_create_time(**kwargs):
     tr = get_transaction_db(address)
     if not tr:
         return {
-            "tr_create_time": 0
+            "msg": True
         }
-    return {
-        "tr_create_time": tr.time_stamp
-    }
+    if time.time()-tr.time_stamp > 60:
+        return {
+            "msg": True
+        }
+    else:
+        return {
+            "msg": False
+        }
+
