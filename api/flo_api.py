@@ -1,6 +1,6 @@
 # coding:utf-8
 import time
-
+import json
 import requests
 from my_dispatcher import api_add, api
 import asyncio
@@ -8,6 +8,7 @@ import aiohttp
 from lxml import etree
 
 from util.check_fuc import check_kv
+from util.db_redis import redis_store
 from util.db_tools_func import add_transaction_db, get_transaction_db
 
 sema = asyncio.Semaphore(3)
@@ -88,24 +89,37 @@ def get_distribution(*args, **kwargs):
 @api_add
 def get_info(*args, **kwargs):
     """获取当前块数"""
-    url = ["http://network.flo.cash/api/getdifficulty",
-           "http://network.flo.cash/ext/getmoneysupply",
-           "http://network.flo.cash/api/getblockcount",
-           "http://network.flo.cash/api/getnetworkhashps",
-           "http://network.flo.cash/api/getconnectioncount"]
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    tasks = [get_data(u) for u in url]
-    results = loop.run_until_complete(asyncio.gather(*tasks))
-    return {
-        "difficulty": str(results[0]) or "",
-        "coin_supply": str(results[1]) or "",
-        "block_count": str(results[2]) or "",
-        "network_hashps": str(results[3]*pow(10, -9))[0:8] + " GH/s" or "",
-        "node_count": str(results[4]) or "",
+    try:
+        info = redis_store.get("info")
+        if info:
+            return json.loads(info)
+        url = ["http://network.flo.cash/api/getdifficulty",
+               "http://network.flo.cash/ext/getmoneysupply",
+               "http://network.flo.cash/api/getblockcount",
+               "http://network.flo.cash/api/getnetworkhashps",
+               "http://network.flo.cash/api/getconnectioncount"]
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        tasks = [get_data(u) for u in url]
+        results = loop.run_until_complete(asyncio.gather(*tasks))
+        info = {
+            "difficulty": str(results[0]),
+            "coin_supply": str(results[1]),
+            "block_count": str(results[2]),
+            "network_hashps": str(results[3]*pow(10, -9))[0:8] + " GH/s",
+            "node_count": str(results[4]),
 
-    }
-
+        }
+        redis_store.set("info", json.dumps(info))
+        return info
+    except Exception as e:
+        return {
+            "difficulty": "0",
+            "coin_supply": "0",
+            "block_count": "0",
+            "network_hashps": "0 GH/s",
+            "node_count": "0",
+        }
 
 @api_add
 def get_node_count(*args, **kwargs):
@@ -175,17 +189,23 @@ def get_transactions_by_address(*args, **kwargs):
 @api_add
 def get_flo_price(*args, **kwargs):
     """获取flo价格"""
-    r = requests.get("https://www.feixiaohao.com/currencies/florincoin/")
-    selector = etree.HTML(r.text)
-    flo_rmb = selector.xpath("//span[@class='convert']")[0].text
-    flo_usd = selector.xpath("//span[@class='convert']")[1].text
-    flo_btc = selector.xpath("//span[@class='convert']")[2].text
-
-    return {
-        "flo_rmb": flo_rmb,
-        "flo_usd": flo_usd,
-        "flo_btc": flo_btc
-    }
+    try:
+        r = requests.get("https://www.feixiaohao.com/currencies/florincoin/")
+        selector = etree.HTML(r.text)
+        flo_rmb = selector.xpath("//span[@class='convert']")[0].text
+        flo_usd = selector.xpath("//span[@class='convert']")[1].text
+        flo_btc = selector.xpath("//span[@class='convert']")[2].text
+        return {
+            "flo_rmb": flo_rmb,
+            "flo_usd": flo_usd,
+            "flo_btc": flo_btc
+        }
+    except Exception as e:
+        return {
+            "flo_rmb": "0",
+            "flo_usd": "0",
+            "flo_btc": "0"
+        }
 
 
 @api_add

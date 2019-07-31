@@ -106,7 +106,7 @@ class Hyf(object):
         method = "get_info"
         data = {
         }
-        self.send_request(url=self.url_wai_flask, method=method, data=data)
+        self.send_request(url=self.url_local_flask, method=method, data=data)
 
     def test_get_address_utxo(self):
         method = "get_address_utxo"
@@ -139,6 +139,12 @@ class Hyf(object):
         }
         self.send_request(url=self.url_wai_flask, method=method, data=data)
 
+    def test_get_flo_price(self):
+        method = "get_flo_price"
+        data = {
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
 
 if __name__ == "__main__":
     hyf = Hyf()
@@ -147,7 +153,8 @@ if __name__ == "__main__":
     # hyf.test_get_difficulty()
     # hyf.test_get_coin_supply()
     # hyf.test_get_distribution()
-    # hyf.test_get_info()
+    hyf.test_get_info()
+    hyf.test_get_flo_price()
     # hyf.test_get_network_hashps()
     # hyf.test_get_node_count()
     # for i in range(1):
@@ -157,6 +164,6 @@ if __name__ == "__main__":
     # hyf.test_get_transactions_by_address()
     # hyf.test_get_transactions()
     # hyf.test_add_transaction()
-    hyf.test_get_tr_create_time()
+    # hyf.test_get_tr_create_time()
 
 
