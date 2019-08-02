@@ -144,6 +144,45 @@ class Hyf(object):
         data = {
         }
         self.send_request(url=self.url_local_flask, method=method, data=data)
+    """axe"""
+    def test_get_axe_block(self):
+        method = "get_axe_block"
+        data = {
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
+    def test_get_axe_balance(self):
+        method = "get_axe_balance"
+        data = {
+            "address": "P9bpHi2xFCMG3N5ZQeryXwV2abyzSC1TZj"
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
+    def test_get_axe_transactions(self):
+        method = "get_axe_transactions"
+        data = {
+            "address": "P9bpHi2xFCMG3N5ZQeryXwV2abyzSC1TZj"
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
+    def test_get_axe_address_utxo(self):
+        method = "get_axe_address_utxo"
+        data = {
+            "address": "P9bpHi2xFCMG3N5ZQeryXwV2abyzSC1TZj"
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
+    def test_get_axe_price(self):
+        method = "get_axe_price"
+        data = {
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
+    def test_get_axe_info(self):
+        method = "get_axe_info"
+        data = {
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
 
 
 if __name__ == "__main__":
@@ -153,8 +192,8 @@ if __name__ == "__main__":
     # hyf.test_get_difficulty()
     # hyf.test_get_coin_supply()
     # hyf.test_get_distribution()
-    hyf.test_get_info()
-    hyf.test_get_flo_price()
+    # hyf.test_get_info()
+    # hyf.test_get_flo_price()
     # hyf.test_get_network_hashps()
     # hyf.test_get_node_count()
     # for i in range(1):
@@ -166,4 +205,10 @@ if __name__ == "__main__":
     # hyf.test_add_transaction()
     # hyf.test_get_tr_create_time()
 
-
+    # axe
+    # hyf.test_get_axe_block()
+    # hyf.test_get_axe_balance()
+    # hyf.test_get_axe_transactions()
+    # hyf.test_get_axe_address_utxo()
+    hyf.test_get_axe_price()
+    hyf.test_get_axe_info()

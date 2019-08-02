@@ -6,7 +6,7 @@ from my_dispatcher import api_add, api
 import asyncio
 import aiohttp
 from lxml import etree
-
+import config
 from util.check_fuc import check_kv
 from util.db_redis import redis_store
 from util.db_tools_func import add_transaction_db, get_transaction_db
@@ -90,9 +90,9 @@ def get_distribution(*args, **kwargs):
 def get_info(*args, **kwargs):
     """获取当前块数"""
     try:
-        info = redis_store.get("info")
-        if info:
-            return json.loads(info)
+        flo_info = redis_store.get("flo_info")
+        if flo_info:
+            return json.loads(flo_info)
         url = ["http://network.flo.cash/api/getdifficulty",
                "http://network.flo.cash/ext/getmoneysupply",
                "http://network.flo.cash/api/getblockcount",
@@ -110,7 +110,7 @@ def get_info(*args, **kwargs):
             "node_count": str(results[4]),
 
         }
-        redis_store.set("info", json.dumps(info))
+        redis_store.set("flo_info", json.dumps(info), config.redis_expire_time)
         return info
     except Exception as e:
         return {
@@ -120,6 +120,7 @@ def get_info(*args, **kwargs):
             "network_hashps": "0 GH/s",
             "node_count": "0",
         }
+
 
 @api_add
 def get_node_count(*args, **kwargs):

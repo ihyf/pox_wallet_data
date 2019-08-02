@@ -39,5 +39,9 @@ API_TRUST_DOMAIN = ""
 # 创建server_db
 "create database pox_wallet default character set utf8mb4;"
 
+axe_livenet = "https://insight.axerunners.com/api"
+# redis过期时间
+redis_expire_time = 60*60*10
+
 
 
