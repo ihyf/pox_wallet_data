@@ -94,26 +94,26 @@ def broadcast_axe_raw_hex(*args, **kwargs):
     }
 
 
-@api_add
-def get_axe_price(*args, **kwargs):
-    """获取axe价格"""
-    try:
-        r = requests.get("https://www.feixiaohao.com/currencies/axe/")
-        selector = etree.HTML(r.text)
-        axe_rmb = selector.xpath("//span[@class='convert']")[0].text
-        axe_usd = selector.xpath("//span[@class='convert']")[1].text
-        axe_btc = selector.xpath("//span[@class='convert']")[2].text
-        return {
-            "axe_rmb": axe_rmb,
-            "axe_usd": axe_usd,
-            "axe_btc": axe_btc
-        }
-    except Exception as e:
-        return {
-            "axe_rmb": "0",
-            "axe_usd": "0",
-            "axe_btc": "0"
-        }
+# @api_add
+# def get_axe_price(*args, **kwargs):
+#     """获取axe价格"""
+#     try:
+#         r = requests.get("https://www.feixiaohao.com/currencies/axe/")
+#         selector = etree.HTML(r.text)
+#         axe_rmb = selector.xpath("//span[@class='convert']")[0].text
+#         axe_usd = selector.xpath("//span[@class='convert']")[1].text
+#         axe_btc = selector.xpath("//span[@class='convert']")[2].text
+#         return {
+#             "axe_rmb": axe_rmb,
+#             "axe_usd": axe_usd,
+#             "axe_btc": axe_btc
+#         }
+#     except Exception as e:
+#         return {
+#             "axe_rmb": "0",
+#             "axe_usd": "0",
+#             "axe_btc": "0"
+#         }
 
 
 @api_add

@@ -188,25 +188,48 @@ def get_transactions_by_address(*args, **kwargs):
 
 
 @api_add
-def get_flo_price(*args, **kwargs):
-    """获取flo价格"""
+def get_all_price(*args, **kwargs):
+    """获取flo axe 价格"""
     try:
         r = requests.get("https://www.feixiaohao.com/currencies/florincoin/")
         selector = etree.HTML(r.text)
         flo_rmb = selector.xpath("//span[@class='convert']")[0].text
         flo_usd = selector.xpath("//span[@class='convert']")[1].text
         flo_btc = selector.xpath("//span[@class='convert']")[2].text
-        return {
+        flo = {
             "flo_rmb": flo_rmb,
             "flo_usd": flo_usd,
             "flo_btc": flo_btc
         }
     except Exception as e:
-        return {
+        flo = {
             "flo_rmb": "0",
             "flo_usd": "0",
             "flo_btc": "0"
         }
+
+    try:
+        r = requests.get("https://www.feixiaohao.com/currencies/axe/")
+        selector = etree.HTML(r.text)
+        axe_rmb = selector.xpath("//span[@class='convert']")[0].text
+        axe_usd = selector.xpath("//span[@class='convert']")[1].text
+        axe_btc = selector.xpath("//span[@class='convert']")[2].text
+        axe = {
+            "axe_rmb": axe_rmb,
+            "axe_usd": axe_usd,
+            "axe_btc": axe_btc
+        }
+    except Exception as e:
+        axe = {
+            "axe_rmb": "0",
+            "axe_usd": "0",
+            "axe_btc": "0"
+        }
+
+    return {
+        "flo": flo,
+        "axe": axe
+    }
 
 
 @api_add
