@@ -57,8 +57,48 @@ def get_axe_transactions(*args, **kwargs):
     address = kwargs.get("address")
     oip = get_axe_oip()
     transactions = oip.getTransactionsForAddress(address)
+    txs = []
+    for t in transactions["txs"]:
+        in_or_out = "out"
+        d = {}
+        if t["version"] == 3:
+            continue
+        vin_addrs = [vin["addr"] for vin in t["vin"]]
+        vout_addrs = [vout["scriptPubKey"]["addresses"][0] for vout in t["vout"]]
+        d["txid"] = t["txid"]
+        d["fees"] = t["fees"]
+
+        if address in vin_addrs and address not in vout_addrs:
+            in_or_out = "out"
+            for i in t["vin"]:
+                if address == i["addr"]:
+                    value = i["value"]
+            from_address = address
+            to_address = vout_addrs[0]
+        elif address in vin_addrs and address in vout_addrs:
+            in_or_out = "out"
+            for i in t["out"]:
+                if address != i["scriptPubKey"]["addresses"][0]:
+                    value = i["value"]
+            from_address = address
+            to_address = vout_addrs[0]
+        else:
+            in_or_out = "in"
+            for i in t["vout"]:
+                if address == i["scriptPubKey"]["addresses"][0]:
+                    value = i["value"]
+            from_address = vin_addrs[0]
+            to_address = address
+        d["value"] = value
+        d["in_or_out"] = in_or_out
+        d["time"] = t["time"]
+        d["blocktime"] = t["blocktime"]
+        d["from_address"] = from_address
+        d["to_address"] = to_address
+        txs.append(d)
+
     return {
-        "transactions": transactions
+        "txs": txs
     }
 
 

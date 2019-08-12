@@ -172,8 +172,8 @@ class Hyf(object):
         }
         self.send_request(url=self.url_local_flask, method=method, data=data)
 
-    def test_get_axe_price(self):
-        method = "get_axe_price"
+    def test_get_all_price(self):
+        method = "get_all_price"
         data = {
         }
         self.send_request(url=self.url_local_flask, method=method, data=data)
@@ -208,7 +208,8 @@ if __name__ == "__main__":
     # axe
     # hyf.test_get_axe_block()
     # hyf.test_get_axe_balance()
-    # hyf.test_get_axe_transactions()
+    hyf.test_get_axe_transactions()
     # hyf.test_get_axe_address_utxo()
-    hyf.test_get_axe_price()
-    hyf.test_get_axe_info()
+    # hyf.test_get_all_price()
+    # hyf.test_get_axe_info()
+

@@ -31,8 +31,8 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 
 with app.app_context():
-    db_manager.init_app(app)
-    redis_store.init_app(app)
+    # db_manager.init_app(app)
+    # redis_store.init_app(app)
     # create_tables()   # 手动创建数据库表
     pass
 
