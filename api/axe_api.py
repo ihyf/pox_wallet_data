@@ -74,7 +74,7 @@ def get_axe_transactions(*args, **kwargs):
                 if address == i["addr"]:
                     value = i["value"]
             from_address = address
-            to_address = vout_addrs[0]
+            to_address = vout_addrs[1]
         elif address in vin_addrs and address in vout_addrs:
             in_or_out = "out"
             for i in t["out"]:
