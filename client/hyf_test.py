@@ -214,7 +214,7 @@ if __name__ == "__main__":
 
     # axe
     # hyf.test_get_axe_block()
-    # hyf.test_get_axe_balance()
+    # hyf.test_get_axe_balance()e
     # hyf.test_get_axe_transactions()
     # hyf.test_get_axe_address_utxo()
     # hyf.test_get_all_price()
