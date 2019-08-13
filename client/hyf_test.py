@@ -184,6 +184,13 @@ class Hyf(object):
         }
         self.send_request(url=self.url_local_flask, method=method, data=data)
 
+    def test_broadcast_axe_raw_hex(self):
+        method = "broadcast_axe_raw_hex"
+        data = {
+            "hex": "0300000001e275ae6737ec1202f7fabb1df744866101ccd4ff6c9985ae43fc9751615b7eb7010000006a473044022055aef1e7034de6c5fe8b535b28c11c601915db889e2f222a37f2f4d1db61c36a0220315c11964c47ad6bc64f89ce2cdac0024e9c734dfcb8b0c94e3cda5c545a15380121024a89fbb4e93cde5a41656ff04d32435280c9dda07e99b5db0955fa45acd4486effffffff0100e1f505000000001976a91450a57805c915b69d896ca5a3d7dd2a90ad187eaf88ac00000000"
+        }
+        self.send_request(url=self.url_local_flask, method=method, data=data)
+
 
 if __name__ == "__main__":
     hyf = Hyf()
@@ -208,8 +215,9 @@ if __name__ == "__main__":
     # axe
     # hyf.test_get_axe_block()
     # hyf.test_get_axe_balance()
-    hyf.test_get_axe_transactions()
+    # hyf.test_get_axe_transactions()
     # hyf.test_get_axe_address_utxo()
     # hyf.test_get_all_price()
     # hyf.test_get_axe_info()
+    hyf.test_broadcast_axe_raw_hex()
 

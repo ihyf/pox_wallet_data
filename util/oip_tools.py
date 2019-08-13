@@ -73,14 +73,17 @@ class Oip(object):
         r = requests.get(url)
         return r.json()
 
-    def broadcast_raw_transaction(self, ops):
+    def broadcast_raw_transaction(self, hex):
         url = self.base_url + "/tx/send"
+        ops = {}
+        ops["rawtx"] = hex
         headers = {
-            "content-type": "application/json",
-            "Authorization": ""
+            "content-type": "application/json"
         }
         r = requests.post(url=url, data=json.dumps(ops), headers=headers)
-        return r.json()
+        if r.status_code != 200:
+            return False, r.text
+        return True, r.json()
 
     def getSync(self, the_hash):
         url = self.base_url + "/block/" + the_hash

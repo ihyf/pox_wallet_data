@@ -128,9 +128,13 @@ def broadcast_axe_raw_hex(*args, **kwargs):
         }
     hex = kwargs.get("hex")
     oip = get_axe_oip()
-    utxo = oip.get_address_utxo(hex)
+    _, tx = oip.broadcast_raw_transaction(hex)
+    if not _:
+        return {
+            "error": tx
+        }
     return {
-        "utxo": utxo
+        "tx": tx
     }
 
 
