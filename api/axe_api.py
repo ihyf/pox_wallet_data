@@ -90,11 +90,11 @@ def get_axe_transactions(*args, **kwargs):
             from_address = vin_addrs[0]
             to_address = address
         d["value"] = value
-        d["in_or_out"] = in_or_out
+        d["in_or_out"] = in_or_outss
         d["time"] = t["time"]
         d["blocktime"] = t["blocktime"]
-        d["from_address"] = from_address
-        d["to_address"] = to_address
+        d["fromAddress"] = from_address
+        d["toAddress"] = to_address
         txs.append(d)
 
     return {
