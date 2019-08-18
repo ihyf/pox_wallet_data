@@ -42,7 +42,7 @@ def get_axe_balance(*args, **kwargs):
     oip = get_axe_oip()
     balance = oip.getAddressProperties(address, properties="balance")*pow(10, -8)
     return {
-        "balance": balance
+        "balance": str(balance)
     }
 
 
@@ -95,6 +95,7 @@ def get_axe_transactions(*args, **kwargs):
         d["blocktime"] = t["blocktime"]
         d["fromAddress"] = from_address
         d["toAddress"] = to_address
+        d["block_height"] = t["blockheight"]
         txs.append(d)
 
     return {
@@ -177,11 +178,12 @@ def get_axe_info(*args, **kwargs):
         tasks = [get_data(u) for u in url]
         results = loop.run_until_complete(asyncio.gather(*tasks))
         axe_info = {
-            "axe_difficulty": str(results[0]),
-            "axe_coin_supply": str(results[1]),
-            "axe_block_count": str(results[2]),
-            "axe_network_hashps": str(results[3]*pow(10, -9))[0:8] + " GH/s",
-            "axe_node_count": str(results[4]),
+            "difficulty": str(results[0]),
+            "coin_supply": str(results[1]),
+            "block_count": str(results[2]),
+            "network_hashps": str(results[3]*pow(10, -9))[0:8] + " GH/s",
+            "node_count": str(results[4]),
+            "total": str(21000000)
 
         }
         redis_store.set("axe_info", json.dumps(axe_info), config.redis_expire_time)
@@ -193,4 +195,5 @@ def get_axe_info(*args, **kwargs):
             "block_count": "0",
             "network_hashps": "0 GH/s",
             "node_count": "0",
+            "total": str(21000000)
         }
