@@ -161,9 +161,9 @@ class Hyf(object):
     def test_get_axe_transactions(self):
         method = "get_axe_transactions"
         data = {
-            "address": "P9bpHi2xFCMG3N5ZQeryXwV2abyzSC1TZj"
+            "address": "PA11nqXJfRqYyA1hghwYZqCjQcKPAskCDf"
         }
-        self.send_request(url=self.url_local_flask, method=method, data=data)
+        self.send_request(url=self.url_wai_flask, method=method, data=data)
 
     def test_get_axe_address_utxo(self):
         method = "get_axe_address_utxo"

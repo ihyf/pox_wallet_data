@@ -108,6 +108,7 @@ def get_info(*args, **kwargs):
             "block_count": str(results[2]),
             "network_hashps": str(results[3]*pow(10, -9))[0:8] + " GH/s",
             "node_count": str(results[4]),
+            "total": "160000000"
 
         }
         redis_store.set("flo_info", json.dumps(info), config.redis_expire_time)
@@ -119,6 +120,7 @@ def get_info(*args, **kwargs):
             "block_count": "0",
             "network_hashps": "0 GH/s",
             "node_count": "0",
+            "total": "160000000"
         }
 
 

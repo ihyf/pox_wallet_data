@@ -61,8 +61,8 @@ def get_axe_transactions(*args, **kwargs):
     for t in transactions["txs"]:
         in_or_out = "out"
         d = {}
-        if t["version"] == 3:
-            continue
+        # if t["version"] == 3:
+        #     continue
         vin_addrs = [vin["addr"] for vin in t["vin"]]
         vout_addrs = [vout["scriptPubKey"]["addresses"][0] for vout in t["vout"]]
         d["txid"] = t["txid"]
@@ -77,7 +77,7 @@ def get_axe_transactions(*args, **kwargs):
             to_address = vout_addrs[1]
         elif address in vin_addrs and address in vout_addrs:
             in_or_out = "out"
-            for i in t["out"]:
+            for i in t["vout"]:
                 if address != i["scriptPubKey"]["addresses"][0]:
                     value = i["value"]
             from_address = address
@@ -95,7 +95,7 @@ def get_axe_transactions(*args, **kwargs):
         d["blocktime"] = t["blocktime"]
         d["fromAddress"] = from_address
         d["toAddress"] = to_address
-        d["block_height"] = t["blockheight"]
+        d["blockheight"] = t["blockheight"]
         txs.append(d)
 
     return {
