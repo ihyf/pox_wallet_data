@@ -1,5 +1,5 @@
 # coding:utf-8
-DEBUG = True
+DEBUG = False
 
 # develop
 SQLALCHEMY_DATABASE_URI_SETTINGS = {

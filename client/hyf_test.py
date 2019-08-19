@@ -163,7 +163,7 @@ class Hyf(object):
         data = {
             "address": "PA11nqXJfRqYyA1hghwYZqCjQcKPAskCDf"
         }
-        self.send_request(url=self.url_wai_flask, method=method, data=data)
+        self.send_request(url=self.url_local_flask, method=method, data=data)
 
     def test_get_axe_address_utxo(self):
         method = "get_axe_address_utxo"
@@ -182,7 +182,7 @@ class Hyf(object):
         method = "get_axe_info"
         data = {
         }
-        self.send_request(url=self.url_local_flask, method=method, data=data)
+        self.send_request(url=self.url_wai_flask, method=method, data=data)
 
     def test_broadcast_axe_raw_hex(self):
         method = "broadcast_axe_raw_hex"

@@ -61,8 +61,9 @@ def get_axe_transactions(*args, **kwargs):
     for t in transactions["txs"]:
         in_or_out = "out"
         d = {}
-        # if t["version"] == 3:
-        #     continue
+        if t["version"] == 3:
+            if "type" in t and t["type"] == 5:
+                continue
         vin_addrs = [vin["addr"] for vin in t["vin"]]
         vout_addrs = [vout["scriptPubKey"]["addresses"][0] for vout in t["vout"]]
         d["txid"] = t["txid"]
