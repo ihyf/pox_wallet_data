@@ -97,7 +97,7 @@ def get_axe_transactions(*args, **kwargs):
             d["blocktime"] = t["blocktime"]
         except Exception as e:
             print(e)
-            d["blocktime"] = None
+            d["blocktime"] = -1
         d["fromAddress"] = from_address
         d["toAddress"] = to_address
         d["blockheight"] = t["blockheight"]
