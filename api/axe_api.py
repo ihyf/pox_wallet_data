@@ -93,7 +93,11 @@ def get_axe_transactions(*args, **kwargs):
         d["value"] = value
         d["in_or_out"] = in_or_out
         d["time"] = t["time"]
-        d["blocktime"] = t["blocktime"]
+        try:
+            d["blocktime"] = t["blocktime"]
+        except Exception as e:
+            print(e)
+            d["blocktime"] = None
         d["fromAddress"] = from_address
         d["toAddress"] = to_address
         d["blockheight"] = t["blockheight"]
