@@ -10,6 +10,11 @@ def privacy_agreement():
     return render_template("index.html")
 
 
+@app.route('/privacy_agreement_en')
+def privacy_agreement_en():
+    return render_template("index_en.html")
+
+
 @app.route('/send_tera')
 def send_tera():
     return render_template("send_tera.html")

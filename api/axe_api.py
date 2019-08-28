@@ -188,6 +188,7 @@ def get_axe_info(*args, **kwargs):
             "block_count": str(results[2]),
             "network_hashps": str(results[3]*pow(10, -9))[0:8] + " GH/s",
             "node_count": str(results[4]),
+            "master_nodes": str(1800),
             "total": str(21000000)
 
         }
@@ -200,5 +201,6 @@ def get_axe_info(*args, **kwargs):
             "block_count": "0",
             "network_hashps": "0 GH/s",
             "node_count": "0",
+            "master_nodes": "0",
             "total": str(21000000)
         }
