@@ -589,11 +589,13 @@ URL:http://39.100.40.109:9000/api
 ```json
 {
 	"result": {
-		"axe_difficulty": "5946686.987863185",
-		"axe_coin_supply": "4903509.98174495",
-		"axe_block_count": "301660",
-		"axe_network_hashps": "154660.4 GH/s",
-		"axe_node_count": "9"
+		"difficulty": "3055230.17998016",
+		"coin_supply": "4963548.33922776",
+		"block_count": "316025",
+		"network_hashps": "78423.37 GH/s",
+		"node_count": "9",
+		"master_nodes": "1800",
+		"total": "21000000"
 	},
 	"id": 1,
 	"jsonrpc": "2.0"
