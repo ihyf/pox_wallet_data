@@ -42,6 +42,7 @@ API_TRUST_DOMAIN = ""
 axe_livenet = "https://insight.axerunners.com/api"
 # redis过期时间
 redis_expire_time = 60*60*10
-
+# 定时任务间隔
+seconds = 60
 
 

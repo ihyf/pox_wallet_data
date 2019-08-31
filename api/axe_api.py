@@ -204,3 +204,55 @@ def get_axe_info(*args, **kwargs):
             "master_nodes": "0",
             "total": str(21000000)
         }
+
+
+def get_all_price(*args, **kwargs):
+    """获取flo axe 价格"""
+    try:
+        flo = redis_store.get("flo_price")
+        axe = redis_store.get("axe_price")
+
+        if flo and axe:
+            return {
+                "flo": json.loads(flo),
+                "axe": json.loads(axe)
+            }
+        r = requests.get("https://www.feixiaohao.com/currencies/florincoin/")
+        selector = etree.HTML(r.text)
+        flo_rmb = selector.xpath("//span[@class='convert']")[0].text
+        flo_usd = selector.xpath("//span[@class='convert']")[1].text
+        flo_btc = selector.xpath("//span[@class='convert']")[2].text
+        flo = {
+            "flo_rmb": flo_rmb,
+            "flo_usd": flo_usd,
+            "flo_btc": flo_btc
+        }
+    except Exception as e:
+        flo = {
+            "flo_rmb": "0",
+            "flo_usd": "0",
+            "flo_btc": "0"
+        }
+
+    try:
+        r = requests.get("https://www.feixiaohao.com/currencies/axe/")
+        selector = etree.HTML(r.text)
+        axe_rmb = selector.xpath("//span[@class='convert']")[0].text
+        axe_usd = selector.xpath("//span[@class='convert']")[1].text
+        axe_btc = selector.xpath("//span[@class='convert']")[2].text
+        axe = {
+            "axe_rmb": axe_rmb,
+            "axe_usd": axe_usd,
+            "axe_btc": axe_btc
+        }
+    except Exception as e:
+        axe = {
+            "axe_rmb": "0",
+            "axe_usd": "0",
+            "axe_btc": "0"
+        }
+
+    return {
+        "flo": flo,
+        "axe": axe
+    }

@@ -18,3 +18,4 @@ aiohttp==3.5.4
 lxml==4.3.3
 alembic==1.0.10
 uwsgi
+flask_apscheduler
